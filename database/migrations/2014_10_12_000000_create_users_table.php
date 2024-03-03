@@ -23,45 +23,45 @@ return new class extends Migration
         });
         Schema::create('Principal', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('entradilla');
-            $table->string('cuerpo');
-            $table->string('imagen');
+            $table->string('title');
+            $table->string('summary');
+            $table->string('body');
+            $table->string('image');
             $table->rememberToken();
             $table->timestamps();
         });
-        Schema::create('SobreMi', function (Blueprint $table) {
+        Schema::create('AboutMe', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('texto');
-            $table->string('imagen');
+            $table->string('title');
+            $table->string('text');
+            $table->string('image');
             $table->rememberToken();
             $table->timestamps();
         });
-        Schema::create('Servicios', function (Blueprint $table) {
+        Schema::create('Services', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('entradilla');
-            $table->string('resumen');
-            $table->string('imagen');
-            $table->number('seccion');
+            $table->string('title');
+            $table->string('summary');
+            $table->string('body');
+            $table->string('image');
+            $table->number('section');
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::create('Eventos', function (Blueprint $table) {
+        Schema::create('Events', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->date('fecha');
-            $table->string('resumen');
-            $table->string('imagen');
+            $table->string('title');
+            $table->date('date');
+            $table->string('summary');
+            $table->string('image');
             $table->rememberToken();
             $table->timestamps();
         });                                                     
 
-        Schema::create('Contacto', function (Blueprint $table) {
+        Schema::create('Contact', function (Blueprint $table) {
             $table->id();
-            $table->string('direccion');
+            $table->string('direction');
             $table->rememberToken();
             $table->timestamps();
         });
