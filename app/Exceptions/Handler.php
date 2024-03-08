@@ -27,4 +27,18 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof QueryException) {
+            return response()->json([
+                'error' => [
+                    'status' => 500,
+                    'title' => 'Database Error',
+                    'detail' => 'The requested resource was not found',
+                    'source' => ['pointer' => 'request']
+                ]], 500);
+        }
+        return parent::render($request, $exception);
+    }
 }
