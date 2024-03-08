@@ -21,14 +21,13 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        Schema::create('Principal', function (Blueprint $table) {
+        Schema::create('principals', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('summary');
             $table->string('body');
             $table->string('image');
-            $table->rememberToken();
-            $table->timestamps();
+            
         });
         Schema::create('AboutMe', function (Blueprint $table) {
             $table->id();
@@ -44,7 +43,7 @@ return new class extends Migration
             $table->string('summary');
             $table->string('body');
             $table->string('image');
-            $table->number('section');
+            $table->integer('section');
             $table->rememberToken();
             $table->timestamps();
         });
