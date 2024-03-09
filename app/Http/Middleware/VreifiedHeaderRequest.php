@@ -23,6 +23,18 @@ class VreifiedHeaderRequest
                 "source" => ["pointer" => "header"]
             ] ], 406);
         }
+        if($request->isMethod('post') || $request->isMethod('patch') || $request->isMethod('delete')) {
+            if ($request->header('content-type') !== 'application/vnd.api+json') {
+                return response()->json(['error' =>[
+                    "status" => 415,
+                    "title" => "Invalid Header",
+                    "detail" => "Content-Type header must be application/vnd.api+json",
+                    "source" => ["pointer" => "header"]
+                ] ], 415);
+            }
+        }
         return $next($request);
+
+        
     }
 }

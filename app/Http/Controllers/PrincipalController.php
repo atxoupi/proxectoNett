@@ -23,15 +23,30 @@ class PrincipalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'title' => 'required',
+        //     'summary' => 'required',
+        //     'body' => 'required',
+        //     'image' => 'required'
+        // ]);
+        // $principal = Principal::create($request->all());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Principal $principal)
+    public function show(int $principal)
     {
-          return new PrincipalResource($principal);
+        $resource = Principal::find($principal);
+        if (!$resource) {
+            return response()->json(['error' => [
+                "status" => 404,
+                "title" => "Resource Not Found",
+                "detail" => "The requested resource was not found"
+            
+            ]], 404);
+        }
+        return new PrincipalResource($resource);
     }
 
     /**
