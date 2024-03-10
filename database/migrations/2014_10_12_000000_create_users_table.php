@@ -37,27 +37,7 @@ return new class extends Migration
             $table->string('image');
             $table->rememberToken();
             $table->timestamps();
-        });
-        Schema::create('Services', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('summary');
-            $table->string('body');
-            $table->string('image');
-            $table->integer('section');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-
-        Schema::create('Events', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->date('date');
-            $table->string('summary');
-            $table->string('image');
-            $table->rememberToken();
-            $table->timestamps();
-        });                                                     
+        });                                                    
 
         Schema::create('Contact', function (Blueprint $table) {
             $table->id();

@@ -49,7 +49,7 @@ class PrincipalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StorePrincipalRequest $request, Principal $principal)
+    public function update(PrincipalFormRequest $request, Principal $principal)
     {
         $principal->update($request->input('data.attributes'));
         $principal->save();

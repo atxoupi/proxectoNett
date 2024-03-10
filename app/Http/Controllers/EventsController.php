@@ -2,40 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Services;
+use App\Models\events;
 use Illuminate\Http\Request;
-use App\Http\Resources\ServicesCollection;
-use App\Http\Resources\ServicesResource;
-use App\Http\Requests\ServicesFormRequest;
+use App\Http\Resources\EventsCollection;
+use App\Http\Resources\EventsResource;
+use App\Http\Requests\EventsFormRequest;
 
-class ServicesController extends Controller
+
+class EventsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $services = Services::all();
-        return new ServicesCollection($services);
+        $events = Events::all();
+        return new EventsCollection($events);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ServicesFormRequest $request)
+    public function store(EventsFormRequest $request)
     {
-        $services = new Services($request-> input('data.attributes'));
-        $services->save();
-        return new ServicesResource($services);
-        //
+        $events = new Events($request-> input('data.attributes'));
+        $events->save();
+        return new EventsResource($events);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $services)
+    public function show(int $events)
     {
-        $resource = Services::find($services);
+        $resource = Events::find($events);
         if (!$resource) {
             return response()->json(['error' => [
                 "status" => 404,
@@ -44,16 +44,15 @@ class ServicesController extends Controller
             
             ]], 404);
         }
-        return new ServicesResource($resource);
-        //
+        return new EventsResource($resource);   
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ServicesFormRequest $request, int $services)
+    public function update(EventsFormRequest $request, int $events)
     {
-        $resource = Services::find($services);
+        $resource = Events::find($events);
         if (!$resource) {
             return response()->json(['error' => [
                 "status" => 404,
@@ -65,15 +64,17 @@ class ServicesController extends Controller
         $resource->update($request->input('data.attributes'));
         $resource->save();
 
-        return new ServicesResource($resource);
-        //
+        return new EventsResource($resource);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Services $services)
+    public function destroy(Events $events)
     {
-        //
+        $events->delete();
+        return response(null, 204);
     }
+  
 }
