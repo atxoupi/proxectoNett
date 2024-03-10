@@ -29,16 +29,7 @@ return new class extends Migration
             $table->string('image');
             $table->timestamps();
             
-        });
-        Schema::create('AboutMe', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('text');
-            $table->string('image');
-            $table->rememberToken();
-            $table->timestamps();
-        });                                                    
-
+        });                                                  
         Schema::create('Contact', function (Blueprint $table) {
             $table->id();
             $table->string('direction');

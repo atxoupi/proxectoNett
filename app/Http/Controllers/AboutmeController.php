@@ -2,40 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Services;
+use App\Models\aboutme;
 use Illuminate\Http\Request;
-use App\Http\Resources\ServicesCollection;
-use App\Http\Resources\ServicesResource;
-use App\Http\Requests\ServicesFormRequest;
+use App\Http\Resources\AboutmeCollection;
+use App\Http\Resources\AboutmeResource;
 
-class ServicesController extends Controller
+
+class AboutmeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $services = Services::all();
-        return new ServicesCollection($services);
+        $aboutme = Aboutme::all();
+        return new AboutmeCollection($aboutme);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ServicesFormRequest $request)
+    public function store(Request $request)
     {
-        $services = new Services($request-> input('data.attributes'));
-        $services->save();
-        return new ServicesResource($services);
-        //
+        $aboutme = new Aboutme($request-> input('data.attributes'));
+        $aboutme->save();
+        return new AboutmeResource($aboutme);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(int $services)
+    public function show(int $aboutme)
     {
-        $resource = Services::find($services);
+        $resource = Aboutme::find($aboutme);
         if (!$resource) {
             return response()->json(['error' => [
                 "status" => 404,
@@ -44,16 +43,15 @@ class ServicesController extends Controller
             
             ]], 404);
         }
-        return new ServicesResource($resource);
-        //
+        return new AboutmeResource($resource);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ServicesFormRequest $request, int $services)
+    public function update(Request $request, aboutme $aboutme)
     {
-        $resource = Services::find($services);
+        $resource = Aboutme::find($aboutme);
         if (!$resource) {
             return response()->json(['error' => [
                 "status" => 404,
@@ -65,20 +63,24 @@ class ServicesController extends Controller
         $resource->update($request->input('data.attributes'));
         $resource->save();
 
-        return new ServicesResource($resource);
-        //
+        return new AboutmeResource($resource);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $services)
+    public function destroy(int $aboutme)
     {
-        $resource = Services::find($services);
+        $resource = Aboutme::find($aboutme);
+        if (!$resource) {
+            return response()->json(['error' => [
+                "status" => 404,
+                "title" => "Resource Not Found",
+                "detail" => "The requested resource was not found"
+            
+            ]], 404);
+        }
         $resource->delete();
-
         return response(null, 204);
-        //
     }
-
 }

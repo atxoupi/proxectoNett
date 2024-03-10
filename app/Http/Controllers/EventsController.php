@@ -71,9 +71,10 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Events $events)
+    public function destroy(int $events)
     {
-        $events->delete();
+        $resource = Events::find($events);
+        $resource->delete();
         return response(null, 204);
     }
   
