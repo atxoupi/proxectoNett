@@ -35,7 +35,7 @@ class ServicesController extends Controller
      */
     public function show(int $services)
     {
-        $resource = Services::find($$services);
+        $resource = Services::find($services);
         if (!$resource) {
             return response()->json(['error' => [
                 "status" => 404,
