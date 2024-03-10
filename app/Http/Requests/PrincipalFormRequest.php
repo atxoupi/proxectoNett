@@ -11,7 +11,7 @@ class PrincipalFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class PrincipalFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "data.attributes.title" => ["required", "string"],
+            "data.attributes.summary" => ["required", "string"],
+            "data.attributes.body" => ["required", "string"],
+            "data.attributes.image" => ["required", "string"]
         ];
     }
 }

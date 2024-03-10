@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Principal;
 use App\Http\Resources\PrincipalCollection;
 use App\Http\Resources\PrincipalResource;
+use App\Http\Requests\PrincipalFormRequest;
 
 class PrincipalController extends Controller
 {
@@ -21,15 +22,11 @@ class PrincipalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PrincipalFormRequest $request)
     {
-        // $request->validate([
-        //     'title' => 'required',
-        //     'summary' => 'required',
-        //     'body' => 'required',
-        //     'image' => 'required'
-        // ]);
-        // $principal = Principal::create($request->all());
+        $principal = new Principal($request-> input('data.attributes'));
+        $principal->save();
+        return new PrincipalResource($principal);
     }
 
     /**
@@ -52,10 +49,14 @@ class PrincipalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StorePrincipalRequest $request, Principal $principal)
     {
-        //
+        $principal->update($request->input('data.attributes'));
+        $principal->save();
+
+        return new PrincipalResource($principal);
     }
+    
 
     /**
      * Remove the specified resource from storage.
