@@ -27,4 +27,21 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof QueryException) {
+            $errorCode = $exception->errorInfo[1];
+            $errorMessage = $exception->getMessage();
+            return response()->json([
+                'error' => [
+                    'status' => 500,
+                    'title' => 'Database Error',
+                    'detail' => 'Error in database query: '.$errorMessage,
+                    'source' => ['pointer' => 'request'],
+                    'code' => $errorCode 
+                ]], 500);
+        }
+        return parent::render($request, $exception);
+    }
 }

@@ -21,44 +21,15 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        Schema::create('Principal', function (Blueprint $table) {
+        Schema::create('principals', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('summary');
             $table->string('body');
             $table->string('image');
-            $table->rememberToken();
             $table->timestamps();
-        });
-        Schema::create('AboutMe', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('text');
-            $table->string('image');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-        Schema::create('Services', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('summary');
-            $table->string('body');
-            $table->string('image');
-            $table->number('section');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-
-        Schema::create('Events', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->date('date');
-            $table->string('summary');
-            $table->string('image');
-            $table->rememberToken();
-            $table->timestamps();
-        });                                                     
-
+            
+        });                                                  
         Schema::create('Contact', function (Blueprint $table) {
             $table->id();
             $table->string('direction');
